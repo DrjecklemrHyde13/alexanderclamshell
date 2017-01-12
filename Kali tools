@@ -1,0 +1,28 @@
+Today I will show you how to get kali tools or katoolin, for ubuntu linux.
+
+
+
+
+
+
+On ubuntu linux, things are much more complicated than kali, and less open source.
+
+
+So in order to make it work, we need to download katoolin
+
+
+#alexanderclamshell~: sudo su
+
+
+(enter password for alexanderclamshell) 
+
+example passwrd
+
+
+#rootalexanderclamshell~: katoolin
+
+
+This will show a page called katoolin
+
+
+katoolin will allow you to use kali tools for ubuntu linux.

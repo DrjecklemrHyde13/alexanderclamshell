@@ -1,0 +1,67 @@
+@application {
+	title : Online Example
+}
+
+@include "furia:canvas"
+
+@f_gui_recolor(#0D5476,#FFFFFF)
+@f_gui_frame(id-main, "Furia Script Online Example", 20px, 20px, -20px, -20px) {
+	
+	@f_gui_frame(id-canvas, "3D example", 20px, 20px, 300px, 300px) {
+		@f_canvas(id3d, 0px, 0px, 0px, 0px)
+	}
+	
+	@f_gui_frame(id-right, "Main Features", 340px, 20px, -20px, 300px) {
+		<ul>
+		<li>Easy Windows-compatible executables (EXE files) development and compilation using HTML, HTML5 and JavaScript elements</li>
+		<li>Easy Websites development
+		<li>Files manipulation functions</li>
+		<li>System Registry access</li>
+		<li>Processes access functions</li>
+		<li>Network/Emails access functions</li>
+		<li>Win32 DLLs support</li>
+		<li>Wide set of libraries</li>
+		<li>Free support</li>
+		</ul>
+	}
+	
+	@f_gui_frame(id-bottom-left, "", 20px, 340px, 450px, -20px) {
+		@exact{@eval((11+19)*(15-12)/(2*5))} = @eval((11+19)*(15-12)/(2*5))<br>
+		@exact{@eval(#112233 + #331122)} = @eval(#112233 + #331122)<br>
+		@exact{@eval(70/100 + 3.14)} = @eval(70/100 + 3.14)<br>
+		@exact{@eval((123px+321px)*2+10px} = @eval((123px+321px)*2+10px)<br>
+	}
+	
+	@f_gui_frame(id-bottom-right, "", 490px, 340px, -20px, -20px) {
+		@f_gui_label(id-lbl-1,20px,20px) {Very important progress of something}
+		@f_gui_progress(id-prg,20px,60px,-20px,40px)
+		@f_gui_button(id-btn-1,-20px,-20px,250px,40px,"alert('Nothing');") {Do nothing :-)}
+	}
+}
+
+var C3D = f_getCanvas2d('id3d');
+var S = new f_3d_scene();	
+var k = {x:0,y:0,z:0};
+var sphere_id = null;
+var progress = 0;
+
+function anim() {
+	f_getItemEx('id-prg').setProgress(progress++ % 100);
+	C3D.clear();
+	S.resetScene();
+	S.rotateObject(sphere_id, k.x, k.y, k.z);
+	C3D.drawScene(S);
+	k.x += 0.02;
+	k.y += 0.01;
+	k.z += 0.01;
+	f_requestAnimFrame(anim);
+}
+
+function user_main() {
+	var color_scheme1 = [new f_color(155,0,0), new f_color(255,255,255)];
+	var o = TORUS({r1:100,r2:280,w1:20,w2:40,c:TORUS_CHESSBOARD_COLOR_SCHEME(COLOR("#FF0000"),COLOR("#FFFF00"),20),shading_level:2,scale:[2,2,2]});
+	sphere_id = S.addObject(o);
+	S.addLight(new f_3d_light(new f_3d_point(400,0,-900), new f_color(255,255,255)));
+	f_requestAnimFrame(anim);
+}
+	
